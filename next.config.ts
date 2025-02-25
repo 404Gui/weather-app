@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  devIndicators: {
-    warning: false,
-    error: false,
+  devIndicators: {    
     buildActivity: false,
+    appIsrStatus: false,
+
   },
 };
 
