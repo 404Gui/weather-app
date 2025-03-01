@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
     appIsrStatus: false,
 
   },
+  
+  images: {
+    domains: ['openweathermap.org']
+  }
 };
 
 export default nextConfig;
