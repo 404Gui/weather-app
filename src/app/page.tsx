@@ -9,8 +9,6 @@ import "moment/locale/pt-br";
 import { AutoComplete, Input } from "antd";
 import { motion } from "framer-motion";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 moment.locale("pt-br");
 
 declare global {
@@ -58,7 +56,8 @@ export default function Clima() {
         }
 
         try {
-            const res = await fetch(`${API_URL}/places/autocomplete?input=${encodeURIComponent(input)}`);
+            const res = await fetch(`/api/places/autocomplete?input=${encodeURIComponent(input)}`);
+
             const data = await res.json();
             console.log("Esses saos os dados", data)
 
@@ -95,7 +94,8 @@ export default function Clima() {
 
     const buscarClima = async (selectedCity: string) => {
         try {
-            const response = await fetch(`${API_URL}/weather/city?city=${selectedCity}`);
+            const response = await fetch(`/api/weather/city?city=${selectedCity}`);
+
             const data = await response.json();
 
             if (response.ok) {
@@ -121,7 +121,8 @@ export default function Clima() {
                     const lon = position.coords.longitude;
 
                     try {
-                        const response = await fetch(`${API_URL}/weather/coordinates?lat=${lat}&lon=${lon}`);
+                        const response = await fetch(`/api/weather/coordinates?lat=${lat}&lon=${lon}`);
+
                         const data = await response.json();
 
                         if (response.ok) {

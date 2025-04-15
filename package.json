@@ -14,6 +14,7 @@
     "@headlessui/react": "^2.2.0",
     "@mui/material": "^6.4.5",
     "antd": "^5.24.1",
+    "axios": "^1.8.4",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.475.0",
     "moment": "^2.30.1",
