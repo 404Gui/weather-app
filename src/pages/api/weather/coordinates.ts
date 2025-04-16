@@ -32,6 +32,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(500).json({ error: "Erro ao buscar previsão" });
         }
 
+        const formatarHorario = (timestamp: number, timezoneOffset: number) => {
+            const localTimestamp = (timestamp + timezoneOffset) * 1000;
+            const localDate = new Date(localTimestamp);
+          
+            return localDate.toLocaleTimeString("pt-BR", {
+              hour: "2-digit",
+              minute: "2-digit",
+              timeZone: "UTC",
+            });
+          };                    
+
         res.status(200).json({
             cidade: data.city.name,
             pais: data.city.country,
@@ -47,8 +58,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 icone: dia.weather[0].icon,
                 umidade: dia.humidity,
                 vento: dia.speed,
-                nascerDoSol: new Date(dia.sunrise * 1000).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-                porDoSol: new Date(dia.sunset * 1000).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })
+                porDoSol: formatarHorario(dia.sunset, data.city.timezone),
+                nascerDoSol: formatarHorario(dia.sunrise, data.city.timezone),
+
             }))
         });
     } catch (error) {
